@@ -1,78 +1,88 @@
 import re
-
-
-class CPF:
-    """
-    Representa um CPF brasileiro (Cadastro de Pessoas Físicas).
-    Lida com a formatação e validação do CPF.
-    """
-
-    def __init__(self, cpf_string, formatter, validator):
-        """
-        Inicializa o objeto CPF com uma string bruta de CPF, um formatador
-        e um validador.
-        """
-        self.raw_cpf = cpf_string
-        self.formatter = formatter
-        self.validator = validator
-        self.cpf = self.formatter.format(cpf_string)
-
-    def is_valid(self):
-        """Verifica se o CPF é válido usando o validador fornecido."""
-        return self.validator.validate(self.cpf)
-
+import sys
+import os
 
 class CPFFormatter:
-    """Lida com a formatação de strings de CPF."""
+    """
+    Handles CPF string formatting.
+    
+    Static Methods:
+        format: Formats the CPF string by removing non-numeric characters.
+    """
 
     @staticmethod
-    def format(cpf_string):
-        """Formata a string do CPF removendo caracteres não numéricos."""
+    def format(cpf_string: str) -> str:
+        """Formats the CPF string by removing non-numeric characters.
+
+        Args:
+            cpf_string (str): The CPF string to be formatted.
+
+        Returns:
+            str: The formatted CPF string with only numeric characters.
+        """
         return re.sub(r"[^\d]", "", cpf_string)
 
 
-class CPFValidator:
-    """
-    Valida um CPF usando uma série de regras.
-    """
-
-    def __init__(self):
-        """Inicializa com uma lista de regras de validação."""
-        self.rules = [FormatRule(), DigitRule()]
-
-    def validate(self, cpf):
-        """
-        Valida o CPF aplicando todas as regras.
-        Retorna True se todas as regras forem cumpridas.
-        """
-        return all(rule.validate(cpf) for rule in self.rules)
-
-
 class FormatRule:
-    """Valida o formato do CPF."""
+    """
+    Validates the CPF format.
+    
+    Static Methods:
+        validate: Checks the length and character repetition in the CPF.
+    """
 
     @staticmethod
-    def validate(cpf):
-        """Verifica o comprimento e a repetição de caracteres no CPF."""
+    def validate(cpf: str) -> bool:
+        """Checks the length and character repetition in the CPF.
+
+        Args:
+            cpf (str): The CPF to be validated.
+
+        Returns:
+            bool: True if the CPF format is valid, False otherwise.
+        """
         if len(cpf) != 11 or cpf == cpf[0] * len(cpf):
             return False
         return True
 
 
 class DigitRule:
-    """Valida os dígitos do CPF."""
+    """
+    Validates the CPF digits.
+    
+    Static Methods:
+        calculate_digit: Calculates a CPF digit using a given factor.
+        validate: Validates the CPF digits.
+    """
 
     @staticmethod
-    def calculate_digit(cpf, factor):
+    def calculate_digit(cpf: str, factor: int) -> int:
         """
-        Calcula um dígito do CPF usando um fator dado.
+        Calculates a CPF digit using a given factor.
+
+        Args:
+            cpf (str): The CPF number.
+            factor (int): The factor used in the calculation.
+
+        Returns:
+            int: The calculated CPF digit.
         """
-        sum_digits = sum(int(digit) * factor for digit, factor in zip(cpf, range(factor, 1, -1)))
+        sum_digits = sum(
+            int(digit) * factor for digit, factor in zip(cpf, range(factor, 1, -1))
+        )
         return (sum_digits * 10) % 11
 
     @staticmethod
-    def validate(cpf):
-        """Valida os dígitos do CPF."""
+    def validate(cpf: str) -> bool:
+        """
+        Validates the CPF digits.
+
+        Args:
+            cpf (str): The CPF number.
+
+        Returns:
+            bool: True if the CPF digits are valid, False otherwise.
+        """
         digit1 = DigitRule.calculate_digit(cpf, 10)
         digit1 = 0 if digit1 == 10 else digit1
 
@@ -82,15 +92,71 @@ class DigitRule:
         return str(digit1) == cpf[9] and str(digit2) == cpf[10]
 
 
-def main():
-    """Entrada do usuário para CPF e verificação de validade."""
-    cpf_input = input("Formato para inserir CPF - XXX.XXX.XXX-XX: ")
-    cpf = CPF(cpf_input, CPFFormatter(), CPFValidator())
-    if cpf.is_valid():
-        print("CPF é válido")
-    else:
-        print("CPF inválido")
+class CPFValidator:
+    """
+    Validates a CPF using a set of rules.
+
+    Attributes:
+        rules (list): A list of validation rules to be applied.
+        
+    Methods:
+        validate: Validates the CPF by applying all the rules.
+    """
+
+    def __init__(self):
+        """Initializes with a list of validation rules."""
+        self.rules = [FormatRule(), DigitRule()]
+
+    def validate(self, cpf: str) -> bool:
+        """
+        Validates the CPF by applying all the rules.
+
+        Args:
+            cpf (str): The CPF to be validated.
+
+        Returns:
+            bool: True if all rules are satisfied, False otherwise.
+        """
+        return all(rule.validate(cpf) for rule in self.rules)
 
 
-if __name__ == "__main__":
-    main()
+class CPF:
+    """
+    Represents a Brazilian CPF (Cadastro de Pessoas Físicas).
+    Handles CPF formatting and validation.
+    
+    Attributes:
+        raw_cpf (str): The raw CPF string.
+        formatter (CPFFormatter): The formatter object responsible for CPF formatting.
+        validator (CPFValidator): The validator object responsible for CPF validation.
+        cpf (str): The formatted CPF string.
+        
+    Methods:
+        is_valid: Checks if the CPF is valid using the provided validator.
+    """
+
+    def __init__(
+        self, cpf_string: str, formatter: CPFFormatter, validator: CPFValidator
+    ):
+        """
+        Initializes the CPF object with a raw CPF string, a formatter,
+        and a validator.
+
+        Args:
+            cpf_string (str): The raw CPF string.
+            formatter (CPFFormatter): The formatter object responsible for CPF formatting.
+            validator (CPFValidator): The validator object responsible for CPF validation.
+        """
+        self.raw_cpf = cpf_string
+        self.formatter = formatter
+        self.validator = validator
+        self.cpf = self.formatter.format(cpf_string)
+
+    def is_valid(self) -> bool:
+        """
+        Checks if the CPF is valid using the provided validator.
+
+        Returns:
+            bool: True if the CPF is valid, False otherwise.
+        """
+        return self.validator.validate(self.cpf)

@@ -3,8 +3,8 @@ This module contains the tests for the cpf_validator module.
 """
 
 import random
-# import pytest
 import app.cpf_validator as cpf_validator
+
 
 # Função para gerar um CPF aleatório sem sequências de números repetidos
 def generate_random_cpf() -> str:
@@ -14,7 +14,7 @@ def generate_random_cpf() -> str:
     Returns:
         str: A randomly generated CPF number.
     """
-    return str(random.randint(int(10E10), int(10E11) - 1))
+    return str(random.randint(int(10e10), int(10e11) - 1))
 
 
 # Função para formatar um CPF
@@ -49,7 +49,10 @@ def test_cpf_formatting():
     random_cpf = generate_random_cpf()
     formatted_cpf = format_cpf(random_cpf)
 
-    assert formatted_cpf == f"{random_cpf[:3]}.{random_cpf[3:6]}.{random_cpf[6:9]}-{random_cpf[9:]}"
+    assert (
+        formatted_cpf
+        == f"{random_cpf[:3]}.{random_cpf[3:6]}.{random_cpf[6:9]}-{random_cpf[9:]}"
+    )
 
 
 # Teste para verificar a validação de CPF válido
@@ -58,13 +61,13 @@ def test_valid_cpf_validation():
     Test case to validate a valid CPF.
 
     This test case creates a CPF object with a valid CPF number and checks if it is considered valid.
-    
+
     Raises:
         AssertionError: If the CPF object is not considered valid.
     """
-    # random_cpf = generate_random_cpf()
-    # formatted_cpf = format_cpf(random_cpf)
-    valid_cpf = cpf_validator.CPF("123.456.789-09", cpf_validator.CPFFormatter(),cpf_validator.CPFValidator())
+    valid_cpf = cpf_validator.CPF(
+        "123.456.789-09", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
 
     assert valid_cpf.is_valid() is True
 
@@ -73,13 +76,13 @@ def test_valid_cpf_validation():
 def test_invalid_cpf_validation():
     """
     Test case to validate the behavior of the CPF class when an invalid CPF is provided.
-    
+
     Raises:
         AssertionError: If the CPF object is not considered valid.
     """
-    # random_cpf = generate_random_cpf()
-    # formatted_cpf = format_cpf(random_cpf)
-    invalid_cpf = cpf_validator.CPF("123.456.789-00", cpf_validator.CPFFormatter(),cpf_validator.CPFValidator())
+    invalid_cpf = cpf_validator.CPF(
+        "123.456.789-00", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
     invalid_cpf.cpf = invalid_cpf.cpf[:-1]
 
     assert invalid_cpf.is_valid() is False
@@ -89,13 +92,13 @@ def test_invalid_cpf_validation():
 def test_valid_length_cpf_validation():
     """
     Test case to verify the validation of a CPF with a valid length.
-    
+
     Raises:
         AssertionError: If the CPF object is not considered valid.
     """
-    # random_cpf = generate_random_cpf()
-    # formatted_cpf = format_cpf(random_cpf)
-    valid_length_cpf = cpf_validator.CPF("123.456.789-09", cpf_validator.CPFFormatter(),cpf_validator.CPFValidator())
+    valid_length_cpf = cpf_validator.CPF(
+        "123.456.789-09", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
 
     assert valid_length_cpf.is_valid() is True
 
@@ -104,13 +107,13 @@ def test_valid_length_cpf_validation():
 def test_invalid_length_cpf_validation():
     """
     Test case to validate the behavior of CPF validation when the CPF has an invalid length.
-    
+
     Raises:
         AssertionError: If the CPF object is not considered valid.
     """
-    # random_cpf = generate_random_cpf()
-    # formatted_cpf = format_cpf(random_cpf)
-    invalid_length_cpf = cpf_validator.CPF("123.456.789-00", cpf_validator.CPFFormatter(),cpf_validator.CPFValidator())
+    invalid_length_cpf = cpf_validator.CPF(
+        "123.456.789-00", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
     invalid_length_cpf.cpf = invalid_length_cpf.cpf[:-1]
 
     assert invalid_length_cpf.is_valid() is False
@@ -156,3 +159,24 @@ def test_digit_rule():
     # Teste com CPF inválido (dígitos errados)
     assert digit_rule.validate("12345678900") is False
 
+# Teste para verificar formatação exótica de CPF
+def test_unexpected_formatting():
+    """
+    Test the CPF class of the cpf_validator module with unexpected formatting.
+
+    This function tests the behavior of the CPF class when a CPF number with unexpected formatting is provided.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    
+    cpf_digits = "12345678909"
+    
+    positions = [i for i in range(11) if random.random() > 0.5]
+    
+    for i, position in enumerate(positions):
+        cpf_entry = cpf_digits[:position + i] + random.choice([".", "-", "+", " "]) + cpf_digits[position + i:]
+        
+    cpf = cpf_validator.CPF(cpf_entry, cpf_validator.CPFFormatter(), cpf_validator.CPFValidator())
+
+    assert cpf.is_valid() is True

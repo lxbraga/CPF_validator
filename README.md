@@ -1,6 +1,6 @@
 # CPF_validator
 
-This app is ment to validate CPF numbers.
+This app is meant to validate CPF numbers.
 
 ## Installation
 
