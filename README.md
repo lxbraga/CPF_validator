@@ -6,6 +6,7 @@ The group members are:
 
 - [Dávila Meireles](https://github.com/davilameireles)
 - [Eduardo Adame Salles](https://github.com/adamesalles)
+- [Kayo Yokoyama](https://github.com/kayo-ko)
 - [Lucas Braga](https://github.com/lxbraga)
 - [William Sena](https://github.com/wllsena)
 
