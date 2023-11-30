@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://lxbraga.github.io/CPF_validator/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>CPF Validator</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/CPF_validator/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> CPF Validator
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#api-reference">API Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator">cpf_validator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator.CPF">CPF</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.CPF.__init__">__init__()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.CPF.is_valid">is_valid()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator.CPFFormatter">CPFFormatter</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.CPFFormatter.format">format()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator.CPFValidator">CPFValidator</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.CPFValidator.__init__">__init__()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.CPFValidator.validate">validate()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator.DigitRule">DigitRule</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.DigitRule.calculate_digit">calculate_digit()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.DigitRule.validate">validate()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#app.cpf_validator.FormatRule">FormatRule</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#app.cpf_validator.FormatRule.validate">validate()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests-reference">Tests Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator">test_cpf_validator</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.format_cpf">format_cpf()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.generate_random_cpf">generate_random_cpf()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_cpf_formatting">test_cpf_formatting()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_digit_rule">test_digit_rule()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_format_rule">test_format_rule()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_invalid_cpf_validation">test_invalid_cpf_validation()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_invalid_length_cpf_validation">test_invalid_length_cpf_validation()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_unexpected_formatting">test_unexpected_formatting()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_valid_cpf_validation">test_valid_cpf_validation()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tests.test_cpf_validator.test_valid_length_cpf_validation">test_valid_length_cpf_validation()</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">CPF Validator</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="welcome-to-cpf-validator">Welcome to CPF Validator</h1>
+<p>The CPF Validator is a simple app to validate CPF numbers.</p>
+<p>The group members are:</p>
+<ul>
+<li><a href="https://github.com/davilameireles">Dávila Meireles</a></li>
+<li><a href="https://github.com/adamesalles">Eduardo Adame Salles</a></li>
+<li><a href="https://github.com/lxbraga">Lucas Braga</a></li>
+<li><a href="https://github.com/wllsena">William Sena</a></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>We recommend you to use poetry to install the dependencies.</p>
+<pre><code class="language-bash">poetry install
+</code></pre>
+<p>And then you might want to run the app with:</p>
+<pre><code class="language-bash">poetry run python app/main.py
+</code></pre>
+<p>If you want to run the tests, you can do it with:</p>
+<pre><code class="language-bash">poetry run coverage run -m pytest
+poetry run coverage report -m
+</code></pre>
+<p>If you're not using poetry, you can install the dependencies from the <a href="../requirements.txt"><code>requirements.txt</code></a> file.</p>
+<h2 id="project-layout">Project layout</h2>
+<pre><code>app # The app folder
+    cpf_validator.py # The CPF validator module
+    main.py # The main module
+docs
+    about.md # The about page
+    index.md # The index page
+mkdocs.yml # The mkdocs configuration file
+poetry.lock # The poetry lock file
+pyproject.toml # The poetry configuration file
+README.md # The README file
+requirements.txt # The requirements file
+tests # The tests folder
+    test_cpf_validator.py # The tests for the CPF validator module
+</code></pre>
+<h2 id="api-reference">API Reference</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="app.cpf_validator"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="app.cpf_validator.CPF" class="doc doc-heading">
+          <code>CPF</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Represents a Brazilian CPF (Cadastro de Pessoas Físicas).
+Handles CPF formatting and validation.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Attributes:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>raw_cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The raw CPF string.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>formatter</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="app.cpf_validator.CPFFormatter" href="#app.cpf_validator.CPFFormatter">CPFFormatter</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The formatter object responsible for CPF formatting.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>validator</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="app.cpf_validator.CPFValidator" href="#app.cpf_validator.CPFValidator">CPFValidator</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The validator object responsible for CPF validation.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The formatted CPF string.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <p><strong>Methods:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>is_valid</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Checks if the CPF is valid using the provided validator.</p>
+              </div>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>app/cpf_validator.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CPF:
+    """
+    Represents a Brazilian CPF (Cadastro de Pessoas Físicas).
+    Handles CPF formatting and validation.
+
+    Attributes:
+        raw_cpf (str): The raw CPF string.
+        formatter (CPFFormatter): The formatter object responsible for CPF formatting.
+        validator (CPFValidator): The validator object responsible for CPF validation.
+        cpf (str): The formatted CPF string.
+
+    Methods:
+        is_valid: Checks if the CPF is valid using the provided validator.
+    """
+
+    def __init__(
+        self, cpf_string: str, formatter: CPFFormatter, validator: CPFValidator
+    ):
+        """
+        Initializes the CPF object with a raw CPF string, a formatter,
+        and a validator.
+
+        Args:
+            cpf_string (str): The raw CPF string.
+            formatter (CPFFormatter): The formatter object responsible for CPF formatting.
+            validator (CPFValidator): The validator object responsible for CPF validation.
+        """
+        self.raw_cpf = cpf_string
+        self.formatter = formatter
+        self.validator = validator
+        self.cpf = self.formatter.format(cpf_string)
+
+    def is_valid(self) -&gt; bool:
+        """
+        Checks if the CPF is valid using the provided validator.
+
+        Returns:
+            bool: True if the CPF is valid, False otherwise.
+        """
+        return self.validator.validate(self.cpf)</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.CPF.__init__" class="doc doc-heading">
+          <code class="highlight language-python">__init__(cpf_string, formatter, validator)</code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Initializes the CPF object with a raw CPF string, a formatter,
+and a validator.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf_string</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The raw CPF string.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>formatter</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="app.cpf_validator.CPFFormatter" href="#app.cpf_validator.CPFFormatter">CPFFormatter</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The formatter object responsible for CPF formatting.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>validator</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="app.cpf_validator.CPFValidator" href="#app.cpf_validator.CPFValidator">CPFValidator</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The validator object responsible for CPF validation.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def __init__(
+    self, cpf_string: str, formatter: CPFFormatter, validator: CPFValidator
+):
+    """
+    Initializes the CPF object with a raw CPF string, a formatter,
+    and a validator.
+
+    Args:
+        cpf_string (str): The raw CPF string.
+        formatter (CPFFormatter): The formatter object responsible for CPF formatting.
+        validator (CPFValidator): The validator object responsible for CPF validation.
+    """
+    self.raw_cpf = cpf_string
+    self.formatter = formatter
+    self.validator = validator
+    self.cpf = self.formatter.format(cpf_string)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.CPF.is_valid" class="doc doc-heading">
+          <code class="highlight language-python">is_valid()</code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Checks if the CPF is valid using the provided validator.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>bool</code></b>(                <code>bool</code>
+)            –
+            <div class="doc-md-description">
+              <p>True if the CPF is valid, False otherwise.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def is_valid(self) -&gt; bool:
+    """
+    Checks if the CPF is valid using the provided validator.
+
+    Returns:
+        bool: True if the CPF is valid, False otherwise.
+    """
+    return self.validator.validate(self.cpf)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="app.cpf_validator.CPFFormatter" class="doc doc-heading">
+          <code>CPFFormatter</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Handles CPF string formatting.</p>
+
+
+
+  <p><strong>Methods:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>format</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Formats the CPF string by removing non-numeric characters.</p>
+              </div>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>app/cpf_validator.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CPFFormatter:
+    """
+    Handles CPF string formatting.
+
+    Methods:
+        format: Formats the CPF string by removing non-numeric characters.
+    """
+
+    @staticmethod
+    def format(cpf_string: str) -&gt; str:
+        """Formats the CPF string by removing non-numeric characters.
+
+        Args:
+            cpf_string (str): The CPF string to be formatted.
+
+        Returns:
+            str: The formatted CPF string with only numeric characters.
+        """
+        return re.sub(r"[^\d]", "", cpf_string)</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.CPFFormatter.format" class="doc doc-heading">
+          <code class="highlight language-python">format(cpf_string)</code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Formats the CPF string by removing non-numeric characters.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf_string</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF string to be formatted.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>str</code></b>(                <code>str</code>
+)            –
+            <div class="doc-md-description">
+              <p>The formatted CPF string with only numeric characters.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">@staticmethod
+def format(cpf_string: str) -&gt; str:
+    """Formats the CPF string by removing non-numeric characters.
+
+    Args:
+        cpf_string (str): The CPF string to be formatted.
+
+    Returns:
+        str: The formatted CPF string with only numeric characters.
+    """
+    return re.sub(r"[^\d]", "", cpf_string)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="app.cpf_validator.CPFValidator" class="doc doc-heading">
+          <code>CPFValidator</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Validates a CPF using a set of rules.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Attributes:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>rules</code></b>
+                  (<code>list</code>)
+              –
+              <div class="doc-md-description">
+                <p>A list of validation rules to be applied.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <p><strong>Methods:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>validate</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Validates the CPF by applying all the rules.</p>
+              </div>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>app/cpf_validator.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CPFValidator:
+    """
+    Validates a CPF using a set of rules.
+
+    Attributes:
+        rules (list): A list of validation rules to be applied.
+
+    Methods:
+        validate: Validates the CPF by applying all the rules.
+    """
+
+    def __init__(self):
+        """Initializes with a list of validation rules."""
+        self.rules = [FormatRule(), DigitRule()]
+
+    def validate(self, cpf: str) -&gt; bool:
+        """
+        Validates the CPF by applying all the rules.
+
+        Args:
+            cpf (str): The CPF to be validated.
+
+        Returns:
+            bool: True if all rules are satisfied, False otherwise.
+        """
+        return all(rule.validate(cpf) for rule in self.rules)</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.CPFValidator.__init__" class="doc doc-heading">
+          <code class="highlight language-python">__init__()</code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Initializes with a list of validation rules.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def __init__(self):
+    """Initializes with a list of validation rules."""
+    self.rules = [FormatRule(), DigitRule()]</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.CPFValidator.validate" class="doc doc-heading">
+          <code class="highlight language-python">validate(cpf)</code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Validates the CPF by applying all the rules.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF to be validated.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>bool</code></b>(                <code>bool</code>
+)            –
+            <div class="doc-md-description">
+              <p>True if all rules are satisfied, False otherwise.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def validate(self, cpf: str) -&gt; bool:
+    """
+    Validates the CPF by applying all the rules.
+
+    Args:
+        cpf (str): The CPF to be validated.
+
+    Returns:
+        bool: True if all rules are satisfied, False otherwise.
+    """
+    return all(rule.validate(cpf) for rule in self.rules)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="app.cpf_validator.DigitRule" class="doc doc-heading">
+          <code>DigitRule</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Validates the CPF digits.</p>
+
+
+
+  <p><strong>Methods:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>calculate_digit</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Calculates a CPF digit using a given factor.</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>validate</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Validates the CPF digits.</p>
+              </div>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>app/cpf_validator.py</code></summary>
+              <pre class="highlight"><code class="language-python">class DigitRule:
+    """
+    Validates the CPF digits.
+
+    Methods:
+        calculate_digit: Calculates a CPF digit using a given factor.
+        validate: Validates the CPF digits.
+    """
+
+    @staticmethod
+    def calculate_digit(cpf: str, factor: int) -&gt; int:
+        """
+        Calculates a CPF digit using a given factor.
+
+        Args:
+            cpf (str): The CPF number.
+            factor (int): The factor used in the calculation.
+
+        Returns:
+            int: The calculated CPF digit.
+        """
+        sum_digits = sum(
+            int(digit) * factor for digit, factor in zip(cpf, range(factor, 1, -1))
+        )
+        return (sum_digits * 10) % 11
+
+    @staticmethod
+    def validate(cpf: str) -&gt; bool:
+        """
+        Validates the CPF digits.
+
+        Args:
+            cpf (str): The CPF number.
+
+        Returns:
+            bool: True if the CPF digits are valid, False otherwise.
+        """
+        digit1 = DigitRule.calculate_digit(cpf, 10)
+        digit1 = 0 if digit1 == 10 else digit1
+
+        digit2 = DigitRule.calculate_digit(cpf[:9] + str(digit1), 11)
+        digit2 = 0 if digit2 == 10 else digit2
+
+        return str(digit1) == cpf[9] and str(digit2) == cpf[10]</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.DigitRule.calculate_digit" class="doc doc-heading">
+          <code class="highlight language-python">calculate_digit(cpf, factor)</code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculates a CPF digit using a given factor.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF number.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>factor</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The factor used in the calculation.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>int</code></b>(                <code>int</code>
+)            –
+            <div class="doc-md-description">
+              <p>The calculated CPF digit.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">@staticmethod
+def calculate_digit(cpf: str, factor: int) -&gt; int:
+    """
+    Calculates a CPF digit using a given factor.
+
+    Args:
+        cpf (str): The CPF number.
+        factor (int): The factor used in the calculation.
+
+    Returns:
+        int: The calculated CPF digit.
+    """
+    sum_digits = sum(
+        int(digit) * factor for digit, factor in zip(cpf, range(factor, 1, -1))
+    )
+    return (sum_digits * 10) % 11</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.DigitRule.validate" class="doc doc-heading">
+          <code class="highlight language-python">validate(cpf)</code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Validates the CPF digits.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF number.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>bool</code></b>(                <code>bool</code>
+)            –
+            <div class="doc-md-description">
+              <p>True if the CPF digits are valid, False otherwise.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">@staticmethod
+def validate(cpf: str) -&gt; bool:
+    """
+    Validates the CPF digits.
+
+    Args:
+        cpf (str): The CPF number.
+
+    Returns:
+        bool: True if the CPF digits are valid, False otherwise.
+    """
+    digit1 = DigitRule.calculate_digit(cpf, 10)
+    digit1 = 0 if digit1 == 10 else digit1
+
+    digit2 = DigitRule.calculate_digit(cpf[:9] + str(digit1), 11)
+    digit2 = 0 if digit2 == 10 else digit2
+
+    return str(digit1) == cpf[9] and str(digit2) == cpf[10]</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="app.cpf_validator.FormatRule" class="doc doc-heading">
+          <code>FormatRule</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Validates the CPF format.</p>
+
+
+
+  <p><strong>Methods:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><code>validate</code></td>
+            <td>
+              <div class="doc-md-description">
+                <p>Checks the length and character repetition in the CPF.</p>
+              </div>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>app/cpf_validator.py</code></summary>
+              <pre class="highlight"><code class="language-python">class FormatRule:
+    """
+    Validates the CPF format.
+
+    Methods:
+        validate: Checks the length and character repetition in the CPF.
+    """
+
+    @staticmethod
+    def validate(cpf: str) -&gt; bool:
+        """Checks the length and character repetition in the CPF.
+
+        Args:
+            cpf (str): The CPF to be validated.
+
+        Returns:
+            bool: True if the CPF format is valid, False otherwise.
+        """
+        if len(cpf) != 11 or cpf == cpf[0] * len(cpf):
+            return False
+        return True</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="app.cpf_validator.FormatRule.validate" class="doc doc-heading">
+          <code class="highlight language-python">validate(cpf)</code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Checks the length and character repetition in the CPF.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF to be validated.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>bool</code></b>(                <code>bool</code>
+)            –
+            <div class="doc-md-description">
+              <p>True if the CPF format is valid, False otherwise.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>app/cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">@staticmethod
+def validate(cpf: str) -&gt; bool:
+    """Checks the length and character repetition in the CPF.
+
+    Args:
+        cpf (str): The CPF to be validated.
+
+    Returns:
+        bool: True if the CPF format is valid, False otherwise.
+    """
+    if len(cpf) != 11 or cpf == cpf[0] * len(cpf):
+        return False
+    return True</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h2 id="tests-reference">Tests Reference</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="tests.test_cpf_validator"></a>
+  <div class="doc doc-contents first">
+  
+      <p>This module contains the tests for the cpf_validator module.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.format_cpf" class="doc doc-heading">
+          <code class="highlight language-python">format_cpf(cpf)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Formats a CPF (Brazilian identification number) by adding dots and dashes.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cpf</code></b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CPF to be formatted.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>str</code></b>(                <code>str</code>
+)            –
+            <div class="doc-md-description">
+              <p>The formatted CPF with dots and dashes.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def format_cpf(cpf) -&gt; str:
+    """
+    Formats a CPF (Brazilian identification number) by adding dots and dashes.
+
+    Args:
+        cpf (str): The CPF to be formatted.
+
+    Returns:
+        str: The formatted CPF with dots and dashes.
+
+    """
+    return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.generate_random_cpf" class="doc doc-heading">
+          <code class="highlight language-python">generate_random_cpf()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Generate a random CPF (Cadastro de Pessoas Físicas) number.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>str</code></b>(                <code>str</code>
+)            –
+            <div class="doc-md-description">
+              <p>A randomly generated CPF number.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def generate_random_cpf() -&gt; str:
+    """
+    Generate a random CPF (Cadastro de Pessoas Físicas) number.
+
+    Returns:
+        str: A randomly generated CPF number.
+    """
+    return str(random.randint(int(10e10), int(10e11) - 1))</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_cpf_formatting" class="doc doc-heading">
+          <code class="highlight language-python">test_cpf_formatting()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the formatting of a CPF number.</p>
+<p>This function generates a random CPF number using the <code>generate_random_cpf</code> function,
+formats it using the <code>format_cpf</code> function, and then checks if the formatted CPF matches
+the expected format.</p>
+<p>The expected format of a CPF is "XXX.XXX.XXX-XX", where each X represents a digit of the CPF.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the formatted CPF does not match the expected format.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_cpf_formatting():
+    """
+    Test the formatting of a CPF number.
+
+    This function generates a random CPF number using the `generate_random_cpf` function,
+    formats it using the `format_cpf` function, and then checks if the formatted CPF matches
+    the expected format.
+
+    The expected format of a CPF is "XXX.XXX.XXX-XX", where each X represents a digit of the CPF.
+
+    Raises:
+        AssertionError: If the formatted CPF does not match the expected format.
+    """
+    random_cpf = generate_random_cpf()
+    formatted_cpf = format_cpf(random_cpf)
+
+    assert (
+        formatted_cpf
+        == f"{random_cpf[:3]}.{random_cpf[3:6]}.{random_cpf[6:9]}-{random_cpf[9:]}"
+    )</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_digit_rule" class="doc doc-heading">
+          <code class="highlight language-python">test_digit_rule()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the DigitRule class of the cpf_validator module.</p>
+<p>This function tests the validate() method of the DigitRule class
+by providing valid and invalid CPF numbers and asserting the expected results.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_digit_rule():
+    """
+    Test the DigitRule class of the cpf_validator module.
+
+    This function tests the validate() method of the DigitRule class
+    by providing valid and invalid CPF numbers and asserting the expected results.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    digit_rule = cpf_validator.DigitRule()
+
+    # Teste com CPF válido
+    assert digit_rule.validate("12345678909") is True
+
+    # Teste com CPF inválido (dígitos errados)
+    assert digit_rule.validate("12345678900") is False</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_format_rule" class="doc doc-heading">
+          <code class="highlight language-python">test_format_rule()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the FormatRule class of the cpf_validator module.</p>
+<p>This function tests the validate() method of the FormatRule class
+by providing valid and invalid CPF numbers as input and asserting
+the expected results.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_format_rule():
+    """
+    Test the FormatRule class of the cpf_validator module.
+
+    This function tests the validate() method of the FormatRule class
+    by providing valid and invalid CPF numbers as input and asserting
+    the expected results.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    format_rule = cpf_validator.FormatRule()
+
+    # Teste com CPF válido
+    assert format_rule.validate("12345678909") is True
+
+    # Teste com CPF inválido (comprimento errado)
+    assert format_rule.validate("1234567890") is False</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_invalid_cpf_validation" class="doc doc-heading">
+          <code class="highlight language-python">test_invalid_cpf_validation()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test case to validate the behavior of the CPF class when an invalid CPF is provided.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_invalid_cpf_validation():
+    """
+    Test case to validate the behavior of the CPF class when an invalid CPF is provided.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    invalid_cpf = cpf_validator.CPF(
+        "123.456.789-00", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
+    invalid_cpf.cpf = invalid_cpf.cpf[:-1]
+
+    assert invalid_cpf.is_valid() is False</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_invalid_length_cpf_validation" class="doc doc-heading">
+          <code class="highlight language-python">test_invalid_length_cpf_validation()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test case to validate the behavior of CPF validation when the CPF has an invalid length.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_invalid_length_cpf_validation():
+    """
+    Test case to validate the behavior of CPF validation when the CPF has an invalid length.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    invalid_length_cpf = cpf_validator.CPF(
+        "123.456.789-00", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
+    invalid_length_cpf.cpf = invalid_length_cpf.cpf[:-1]
+
+    assert invalid_length_cpf.is_valid() is False</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_unexpected_formatting" class="doc doc-heading">
+          <code class="highlight language-python">test_unexpected_formatting()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the CPF class of the cpf_validator module with unexpected formatting.</p>
+<p>This function tests the behavior of the CPF class when a CPF number with unexpected formatting is provided.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_unexpected_formatting():
+    """
+    Test the CPF class of the cpf_validator module with unexpected formatting.
+
+    This function tests the behavior of the CPF class when a CPF number with unexpected formatting is provided.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+
+    cpf_digits = "12345678909"
+
+    positions = [i for i in range(11) if random.random() &gt; 0.5]
+
+    for i, position in enumerate(positions):
+        cpf_entry = cpf_digits[:position + i] + random.choice([".", "-", "+", " "]) + cpf_digits[position + i:]
+
+    cpf = cpf_validator.CPF(cpf_entry, cpf_validator.CPFFormatter(), cpf_validator.CPFValidator())
+
+    assert cpf.is_valid() is True</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_valid_cpf_validation" class="doc doc-heading">
+          <code class="highlight language-python">test_valid_cpf_validation()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test case to validate a valid CPF.</p>
+<p>This test case creates a CPF object with a valid CPF number and checks if it is considered valid.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_valid_cpf_validation():
+    """
+    Test case to validate a valid CPF.
+
+    This test case creates a CPF object with a valid CPF number and checks if it is considered valid.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    valid_cpf = cpf_validator.CPF(
+        "123.456.789-09", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
+
+    assert valid_cpf.is_valid() is True</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="tests.test_cpf_validator.test_valid_length_cpf_validation" class="doc doc-heading">
+          <code class="highlight language-python">test_valid_length_cpf_validation()</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test case to verify the validation of a CPF with a valid length.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>AssertionError</code>
+              –
+              <div class="doc-md-description">
+                <p>If the CPF object is not considered valid.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>tests/test_cpf_validator.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_valid_length_cpf_validation():
+    """
+    Test case to verify the validation of a CPF with a valid length.
+
+    Raises:
+        AssertionError: If the CPF object is not considered valid.
+    """
+    valid_length_cpf = cpf_validator.CPF(
+        "123.456.789-09", cpf_validator.CPFFormatter(), cpf_validator.CPFValidator()
+    )
+
+    assert valid_length_cpf.is_valid() is True</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2023-11-30 14:46:13.201157+00:00
+-->
