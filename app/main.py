@@ -21,6 +21,6 @@ if __name__ == "__main__":
             print("Valid CPF.")
         else:
             print("Invalid CPF.")
-        if input("Do you want to validate another CPF? (y/n): ").lower() != "y":
+        if input("Do you want to validate another CPF? (Yy): ").lower() != "y":
             break
         clear_console()
