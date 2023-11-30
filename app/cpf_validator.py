@@ -4,7 +4,7 @@ class CPFFormatter:
     """
     Handles CPF string formatting.
     
-    Static Methods:
+    Methods:
         format: Formats the CPF string by removing non-numeric characters.
     """
 
@@ -25,7 +25,7 @@ class FormatRule:
     """
     Validates the CPF format.
     
-    Static Methods:
+    Methods:
         validate: Checks the length and character repetition in the CPF.
     """
 
@@ -48,7 +48,7 @@ class DigitRule:
     """
     Validates the CPF digits.
     
-    Static Methods:
+    Methods:
         calculate_digit: Calculates a CPF digit using a given factor.
         validate: Validates the CPF digits.
     """

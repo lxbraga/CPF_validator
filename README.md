@@ -1,6 +1,13 @@
 # CPF_validator
 
-This app is meant to validate CPF numbers.
+This app is meant to validate CPF numbers. The documentation is available at [https://lxbraga.github.io/CPF_validator](https://lxbraga.github.io/CPF_validator), built with [MkDocs](https://www.mkdocs.org/).
+
+The group members are:
+
+- [Dávila Meireles](https://github.com/davilameireles)
+- [Eduardo Adame Salles](https://github.com/adamesalles)
+- [Lucas Braga](https://github.com/lxbraga)
+- [William Sena](https://github.com/wllsena)
 
 ## Installation
 
@@ -47,4 +54,18 @@ tests/test_cpf_validator.py      39      0   100%
 -----------------------------------------------------------
 TOTAL                            75      0   100%
 
-``````
+```
+
+## Build MkDocs
+
+You can build the MkDocs documentation with:
+
+```bash
+poetry run mkdocs build
+```
+
+Or just run the server with:
+
+```bash
+poetry run mkdocs serve
+```

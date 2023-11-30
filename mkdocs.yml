@@ -1,0 +1,9 @@
+site_name: CPF Validator
+site_url: https://lxbraga.github.io/CPF_validator
+nav:
+  - Home: index.md
+theme: readthedocs
+
+plugins:
+- search
+- mkdocstrings
